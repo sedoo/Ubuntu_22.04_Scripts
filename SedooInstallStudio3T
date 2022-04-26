@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ "$UID" -ne "0" ]
+then
+  echo "Merci de lancer le script avec sudo"
+  exit 
+fi 
+
+# Placement dans le répertoire /tmp
+cd /tmp
+
+# Installation classique
+wget https://download.studio3t.com/studio-3t/linux/2022.4.0/studio-3t-linux-x64.tar.gz
+tar -xzvf studio-3t-linux-x64.tar.gz
+
+./studio-3t-linux-x64.sh
+
+echo ""
+echo "*** Installation terminée ***"
