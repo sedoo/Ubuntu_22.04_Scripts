@@ -1,0 +1,53 @@
+#!/bin/bash
+
+if [ "$UID" -ne "0" ]
+then
+  echo "Merci de lancer le script avec sudo"
+  exit 
+fi 
+
+# Placement dans le répertoire /tmp
+cd /tmp
+
+# Installation classique
+# Attention : le numéro de version peut changer
+wget https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-5.0.4.tgz
+tar -xzvf PanoplyJ*.tgz
+
+if [[ ! -d /tmp/PanoplyJ ]]; then
+  echo ""
+  echo "ERREUR"
+  echo "Panoply a changé de version"
+  echo "Merci d'éditer le script avec le nouveau lien : https://www.giss.nasa.gov/tools/panoply/download/"
+  exit 
+fi
+
+SUDO_USER_HOME=$( getent passwd $SUDO_USER | cut -d: -f6 )
+SUDO_USER_GROUP=$(id -gn $SUDO_USER)
+
+rm -rf /opt/PanoplyJ
+mv PanoplyJ/ /opt/
+
+SHORTCUT_FOLDER=$SUDO_USER_HOME/.local/share/applications
+
+mkdir -p $SHORTCUT_FOLDER
+
+SHORTCUT_FILE=$SHORTCUT_FOLDER/panoply_sedoo.desktop
+
+rm -f $SHORTCUT_FILE
+
+touch $SHORTCUT_FILE
+chown -R $SUDO_USER:$SUDO_USER_GROUP $SHORTCUT_FILE
+echo "[Desktop Entry]" >> $SHORTCUT_FILE
+echo "Version=1.0" >> $SHORTCUT_FILE
+echo "Type=Application" >> $SHORTCUT_FILE
+echo "Name=Panoply" >> $SHORTCUT_FILE
+echo "Icon=logviewer" >> $SHORTCUT_FILE
+echo "Exec=/opt/PanoplyJ/panoply.sh %U" >> $SHORTCUT_FILE
+echo "Categories=Science;" >> $SHORTCUT_FILE
+echo "Terminal=false" >> $SHORTCUT_FILE
+echo "Comment=Panoply" >> $SHORTCUT_FILE
+echo "StartupWMClass=Panoply" >> $SHORTCUT_FILE
+
+echo ""
+echo "*** Installation terminée ***"
