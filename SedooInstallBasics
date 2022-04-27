@@ -14,6 +14,9 @@ snap refresh
 # paquets de base
 apt install -y apt-transport-https arj btrfs-progs build-essential ca-certificates cabextract curl dconf-editor exfat-fuse flatpak gettext git git git-flow gnome-control-center gnome-disk-utility gnome-firmware gnome-shell-extension-manager gnome-shell-extension-prefs gnome-software gnome-software-plugin-flatpak gnome-system-log gnome-system-monitor gnome-tweaks gnupg gparted hfsplus hfsprogs hfsutils htop inxi lbzip2 lunzip lzip maven mpack nano ncdu neofetch net-tools nodejs npm openjdk-8-jdk openjdk-8-jre openjdk-11-jdk openjdk-11-jre p7zip-full p7zip-rar pigz ppa-purge python3-pip rar rsync sharutils synaptic thunderbird tilix unace unrar unzip uudeview vim wget xfsdump xfsprogs xterm zfsutils-linux zip zstd
 
+# polices microsoft
+echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | /usr/bin/debconf-set-selections ; apt install -y ttf-mscorefonts-installer
+
 # nettoyage
 apt purge -y apport apport-gtk apport-symptoms popularity-contest ubuntu-report
 apt autoremove --purge -y
@@ -22,10 +25,4 @@ apt clean -y
 # configuration flathub
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-flatpak install -y flathub com.github.tchx84.Flatseal
-
-# polices microsoft
-echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | /usr/bin/debconf-set-selections ; apt install ttf-mscorefonts-installer -y
-
-echo ""
-echo "*** Installation terminée ***"
+flatpak install -y --noninteractive flathub com.github.tchx84.Flatseal
