@@ -12,7 +12,7 @@ apt upgrade -y
 snap refresh
 
 # paquets de base
-apt install -y apt-transport-https arj btrfs-progs build-essential ca-certificates cabextract curl dconf-editor exfat-fuse flatpak gettext git git git-flow gnome-control-center gnome-disk-utility gnome-firmware gnome-shell-extension-manager gnome-shell-extension-prefs gnome-software gnome-software-plugin-flatpak gnome-system-log gnome-system-monitor gnome-tweaks gnupg gparted hfsplus hfsprogs hfsutils htop inxi lbzip2 lunzip lzip maven mpack nano ncdu neofetch net-tools nodejs npm openjdk-8-jdk openjdk-8-jre openjdk-11-jdk openjdk-11-jre p7zip-full p7zip-rar pigz ppa-purge python3-pip rar rsync sharutils sqlite3 synaptic thunderbird tilix unace unrar unzip uudeview vim wget xfsdump xfsprogs xterm zfsutils-linux zip zstd
+apt install -y apt-transport-https arj btrfs-progs build-essential ca-certificates cabextract curl dconf-editor exfat-fuse flatpak gettext git git git-flow gnome-control-center gnome-disk-utility gnome-firmware gnome-shell-extension-manager gnome-shell-extension-prefs gnome-software gnome-software-plugin-flatpak gnome-system-log gnome-system-monitor gnome-tweaks gnupg gparted hfsplus hfsprogs hfsutils htop inxi lbzip2 libfuse2 lunzip lzip maven mpack nano ncdu neofetch net-tools nodejs npm openjdk-8-jdk openjdk-8-jre openjdk-11-jdk openjdk-11-jre p7zip-full p7zip-rar pigz ppa-purge python3-pip rar rsync sharutils sqlite3 synaptic thunderbird tilix unace unrar unzip uudeview vim wget xfsdump xfsprogs xterm zfsutils-linux zip zstd
 
 # polices microsoft
 echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | /usr/bin/debconf-set-selections ; apt install -y ttf-mscorefonts-installer
