@@ -11,7 +11,7 @@ cd /tmp
 
 # Installation classique
 # Attention : le numéro de version peut changer
-wget https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-5.0.4.tgz
+wget https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-5.0.5.tgz
 tar -xzvf PanoplyJ*.tgz
 
 if [[ ! -d /tmp/PanoplyJ ]]; then
