@@ -17,7 +17,10 @@ echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https:/
 apt update
 
 # Installation
-apt install -y codium
+apt install -y codium python3-nautilus
+
+# Intégration
+wget -q -O /usr/share/nautilus-python/extensions/codium-nautilus.py https://raw.githubusercontent.com/sedoo/Ubuntu_22.04_Scripts/main/codium-nautilus.py
 
 echo ""
 echo "*** Installation terminée ***"
