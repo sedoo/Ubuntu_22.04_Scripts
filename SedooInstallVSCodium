@@ -22,5 +22,10 @@ apt install -y codium python3-nautilus
 # Intégration
 wget -q -O /usr/share/nautilus-python/extensions/codium-nautilus.py https://raw.githubusercontent.com/sedoo/Ubuntu_22.04_Scripts/main/codium-nautilus.py
 
+# Extensions
+codium --install-extension MS-CEINTL.vscode-language-pack-fr
+codium --install-extension esbenp.prettier-vscode
+codium --install-extension octref.vetur
+
 echo ""
 echo "*** Installation terminée ***"
