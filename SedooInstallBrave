@@ -16,5 +16,9 @@ apt update
 # Installation
 apt install -y brave-browser
 
+# Firefox par défaut
+SUDO_USER_HOME=$( getent passwd $SUDO_USER | cut -d: -f6 )
+echo "xdg-settings set default-web-browser firefox_firefox.desktop" >> $SUDO_USER_HOME/.profile
+
 echo ""
 echo "*** Installation terminée ***"
