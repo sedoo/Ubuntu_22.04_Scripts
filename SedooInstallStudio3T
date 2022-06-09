@@ -3,14 +3,20 @@
 if [ "$UID" -ne "0" ]
 then
   echo "Merci de lancer le script avec sudo"
-  exit 
+  exit 1
 fi 
+
+# variables
+BASICS_SCRIPT_MIN_VERSION="1"
+
+# vérifications
+wget -qO - https://raw.githubusercontent.com/sedoo/Ubuntu_22.04_Scripts/main/version-check.sh | bash -s basics $BASICS_SCRIPT_MIN_VERSION || exit 1
 
 # Placement dans le répertoire /tmp
 cd /tmp
 
 # Installation classique
-wget https://download.studio3t.com/studio-3t/linux/2022.4.0/studio-3t-linux-x64.tar.gz
+wget https://download.studio3t.com/studio-3t/linux/2022.4.0/studio-3t-linux-x64.tar.gz || exit 1
 tar -xzvf studio-3t-linux-x64.tar.gz
 
 ./studio-3t-linux-x64.sh

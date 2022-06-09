@@ -3,18 +3,24 @@
 if [ "$UID" -ne "0" ]
 then
   echo "Merci de lancer le script avec sudo"
-  exit 
+  exit 1
 fi 
 
+# variables
+BASICS_SCRIPT_MIN_VERSION="1"
+
+# vérifications
+wget -qO - https://raw.githubusercontent.com/sedoo/Ubuntu_22.04_Scripts/main/version-check.sh | bash -s basics $BASICS_SCRIPT_MIN_VERSION || exit 1
+
 # Ajout clé & dépot
-wget -nv https://download.owncloud.com/desktop/ownCloud/stable/latest/linux/Ubuntu_22.04/Release.key -O - | apt-key add -
+wget -nv https://download.owncloud.com/desktop/ownCloud/stable/latest/linux/Ubuntu_22.04/Release.key -O - | apt-key add - || exit 1
 
 echo 'deb https://download.owncloud.com/desktop/ownCloud/stable/latest/linux/Ubuntu_22.04/ /' | tee -a /etc/apt/sources.list.d/owncloud.list
 
 apt update
 
 # Installation
-apt install -y owncloud-client
+apt install -y owncloud-client || exit 1
 
 echo ""
 echo "*** Installation terminée ***"

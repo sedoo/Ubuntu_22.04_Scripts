@@ -18,7 +18,7 @@ if [ -e "$SCRIPT_CONF_FILE" ] ; then
         exit 0
     else
         if [ $SCRIPT_CONF_FILE_VERSION_INT -eq 0 ]; then
-            echo "Version invalide"
+            echo "Version invalide du script $1"
             exit -1
         fi
         echo "Le script $1 doit être réinstallé"

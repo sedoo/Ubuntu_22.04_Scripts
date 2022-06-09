@@ -3,15 +3,21 @@
 if [ "$UID" -ne "0" ]
 then
   echo "Merci de lancer le script avec sudo"
-  exit 
+  exit 1
 fi 
+
+# variables
+BASICS_SCRIPT_MIN_VERSION="1"
+
+# vérifications
+wget -qO - https://raw.githubusercontent.com/sedoo/Ubuntu_22.04_Scripts/main/version-check.sh | bash -s basics $BASICS_SCRIPT_MIN_VERSION || exit 1
 
 # Placement dans le répertoire /tmp
 cd /tmp
 
 # Installation classique
 # Attention : le numéro de version peut changer
-wget https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-5.0.5.tgz
+wget https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-5.0.6.tgz
 tar -xzvf PanoplyJ*.tgz
 
 if [[ ! -d /tmp/PanoplyJ ]]; then
@@ -19,7 +25,7 @@ if [[ ! -d /tmp/PanoplyJ ]]; then
   echo "ERREUR"
   echo "Panoply a changé de version"
   echo "Merci d'éditer le script avec le nouveau lien : https://www.giss.nasa.gov/tools/panoply/download/"
-  exit 
+  exit 1
 fi
 
 SUDO_USER_HOME=$( getent passwd $SUDO_USER | cut -d: -f6 )

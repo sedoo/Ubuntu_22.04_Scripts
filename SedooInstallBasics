@@ -3,19 +3,50 @@
 if [ "$UID" -ne "0" ]
 then
   echo "Merci de lancer le script avec sudo"
-  exit 
+  exit 1
 fi 
 
+# variables
+SCRIPT_VERSION="1"
+SCRIPT_CONF_DIR=/etc/sedoo
+SCRIPT_CONF_FILE=$SCRIPT_CONF_DIR/basics
+
+# vérifications OS
+. /etc/lsb-release
+if [ "$DISTRIB_ID" != "Ubuntu" ]; then
+    echo "Vous devez utiliser Ubuntu pour ce script"
+    exit 1
+else
+    if [ "$DISTRIB_RELEASE" != "22.04" ]; then
+        echo "Vous devez utiliser Ubuntu 22.04 pour ce script"
+        exit 1
+    fi
+fi
+
+# vérifications script
+if [ -e "$SCRIPT_CONF_FILE" ] ; then
+    read -r SCRIPT_CONF_FILE_VERSION<$SCRIPT_CONF_FILE
+    if [ "$SCRIPT_CONF_FILE_VERSION" == "$SCRIPT_VERSION" ]; then
+        echo "Script déjà installé"
+        exit 0
+    else
+        echo "Une version différente du script est installée"
+        # redirection vers futurs patchs...
+        exit 1
+    fi
+fi
+
 # mise à jour
-apt update
-apt upgrade -y
-snap refresh
+apt update || exit 1
+apt upgrade -y || exit 1
+snap refresh || exit 1
 
 # paquets de base
-apt install -y apt-transport-https arj btrfs-progs build-essential ca-certificates cabextract curl dconf-editor exfat-fuse flatpak gettext git git git-flow gnome-control-center gnome-disk-utility gnome-firmware gnome-shell-extension-manager gnome-shell-extension-prefs gnome-software gnome-software-plugin-flatpak gnome-system-log gnome-system-monitor gnome-tweaks gnupg gparted hfsplus hfsprogs hfsutils htop inxi lbzip2 libfuse2 lunzip lzip maven mpack nano ncdu neofetch net-tools nodejs npm openjdk-8-jdk openjdk-8-jre openjdk-11-jdk openjdk-11-jre p7zip-full p7zip-rar pigz ppa-purge python3-pip rar rsync sharutils sqlite3 synaptic thunderbird tilix unace unrar unzip uudeview vim wget xfsdump xfsprogs xterm zfsutils-linux zip zstd
+apt install -y apt-transport-https arj btrfs-progs build-essential ca-certificates cabextract curl dconf-editor exfat-fuse flatpak gettext git git git-flow gnome-control-center gnome-disk-utility gnome-firmware gnome-shell-extension-manager gnome-shell-extension-prefs gnome-software gnome-software-plugin-flatpak gnome-system-log gnome-system-monitor gnome-tweaks gnupg gparted hfsplus hfsprogs hfsutils htop inxi lbzip2 libfuse2 lunzip lzip maven mpack nano ncdu neofetch net-tools nodejs npm openjdk-8-jdk openjdk-8-jre openjdk-11-jdk openjdk-11-jre p7zip-full p7zip-rar pigz ppa-purge python3-pip rar rsync sharutils sqlite3 synaptic thunderbird tilix unace unrar unzip uudeview vim wget xfsdump xfsprogs xterm zfsutils-linux zip zstd || exit 1
 
 # polices microsoft
-echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | /usr/bin/debconf-set-selections ; apt install -y ttf-mscorefonts-installer
+echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | /usr/bin/debconf-set-selections
+apt install -y ttf-mscorefonts-installer || exit 1
 
 # nettoyage
 apt purge -y apport apport-gtk apport-symptoms popularity-contest ubuntu-report
@@ -23,9 +54,19 @@ apt autoremove --purge -y
 apt clean -y
 
 # configuration flathub
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo || exit 1
 
-flatpak install -y --noninteractive flathub com.github.tchx84.Flatseal
+flatpak install -y --noninteractive flathub com.github.tchx84.Flatseal || exit 1
+
+# suppression snap zoom
+# le snap zoom est maintenu par un tiers (Oliver Grawert)
+# https://snapcraft.io/zoom-client
+# par sécurité on utilisera le flatpak officiel
+snap remove --purge zoom-client || exit 1
+
+# écriture version du script
+mkdir -p $SCRIPT_CONF_DIR || exit 1
+echo $SCRIPT_VERSION > $SCRIPT_CONF_FILE || exit 1
 
 echo ""
 echo "*** Installation terminée ***"
