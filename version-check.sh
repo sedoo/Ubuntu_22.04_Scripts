@@ -17,6 +17,10 @@ if [ -e "$SCRIPT_CONF_FILE" ] ; then
     if [ $SCRIPT_CONF_FILE_VERSION_INT -ge $SCRIPT_MIN_VERSION_INT ]; then
         exit 0
     else
+        if [ $SCRIPT_CONF_FILE_VERSION_INT -eq 0 ]; then
+            echo "Version invalide"
+            exit -1
+        fi
         echo "Le script $1 doit être réinstallé"
         echo "Version installée = $SCRIPT_CONF_FILE_VERSION_INT"
         echo "Version requise = $SCRIPT_MIN_VERSION_INT"
