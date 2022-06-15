@@ -28,13 +28,10 @@ if [[ ! -d /tmp/PanoplyJ ]]; then
   exit 1
 fi
 
-SUDO_USER_HOME=$( getent passwd $SUDO_USER | cut -d: -f6 )
-SUDO_USER_GROUP=$(id -gn $SUDO_USER)
-
 rm -rf /opt/PanoplyJ
 mv PanoplyJ/ /opt/
 
-SHORTCUT_FOLDER=$SUDO_USER_HOME/.local/share/applications
+SHORTCUT_FOLDER=/usr/share/applications
 
 mkdir -p $SHORTCUT_FOLDER
 
@@ -43,7 +40,6 @@ SHORTCUT_FILE=$SHORTCUT_FOLDER/panoply_sedoo.desktop
 rm -f $SHORTCUT_FILE
 
 touch $SHORTCUT_FILE
-chown -R $SUDO_USER:$SUDO_USER_GROUP $SHORTCUT_FILE
 echo "[Desktop Entry]" >> $SHORTCUT_FILE
 echo "Version=1.0" >> $SHORTCUT_FILE
 echo "Type=Application" >> $SHORTCUT_FILE
