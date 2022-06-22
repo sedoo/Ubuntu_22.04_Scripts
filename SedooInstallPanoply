@@ -15,18 +15,22 @@ wget -qO - https://raw.githubusercontent.com/sedoo/Ubuntu_22.04_Scripts/main/ver
 # Placement dans le répertoire /tmp
 cd /tmp
 
-# Installation classique
-# Attention : le numéro de version peut changer
-wget https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-5.0.6.tgz
-tar -xzvf PanoplyJ*.tgz
+# Recherche de l'archive tgz
+wget https://www.giss.nasa.gov/tools/panoply/download/ -O panoply.html
 
-if [[ ! -d /tmp/PanoplyJ ]]; then
-  echo ""
-  echo "ERREUR"
-  echo "Panoply a changé de version"
-  echo "Merci d'éditer le script avec le nouveau lien : https://www.giss.nasa.gov/tools/panoply/download/"
-  exit 1
-fi
+while read -r line;
+do
+    SUB='.tgz'
+    if [[ "$line" == *"$SUB"* ]]; then
+        TGZ_NAME="${line#*href=\"}"
+        TGZ_NAME=`echo $TGZ_NAME | cut -d '"' -f1`
+    fi
+done < panoply.html
+rm panoply.html
+
+# Installation classique
+wget https://www.giss.nasa.gov/tools/panoply/download/$TGZ_NAME
+tar -xzvf PanoplyJ*.tgz || exit 1
 
 rm -rf /opt/PanoplyJ
 mv PanoplyJ/ /opt/
