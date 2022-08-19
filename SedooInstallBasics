@@ -58,11 +58,13 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 
 flatpak install -y --noninteractive flathub com.github.tchx84.Flatseal || exit 1
 
-# suppression snap zoom
+# suppression snap et deb zoom
 # le snap zoom est maintenu par un tiers (Oliver Grawert)
 # https://snapcraft.io/zoom-client
-# par sécurité on utilisera le flatpak officiel
 snap remove --purge zoom-client || exit 1
+# le paquet deb ne peut se mettre à jour
+# par sécurité on utilisera le flatpak officiel
+apt purge -y zoom
 
 # écriture version du script
 mkdir -p $SCRIPT_CONF_DIR || exit 1
