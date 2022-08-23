@@ -61,10 +61,14 @@ flatpak install -y --noninteractive flathub com.github.tchx84.Flatseal || exit 1
 # suppression snap et deb zoom
 # le snap zoom est maintenu par un tiers (Oliver Grawert)
 # https://snapcraft.io/zoom-client
-snap remove --purge zoom-client || exit 1
+snap remove --purge zoom-client
 # le paquet deb ne peut se mettre à jour
 # par sécurité on utilisera le flatpak officiel
 apt purge -y zoom
+
+# nouveau document texte avec le clic droit
+SUDO_USER_HOME=$( getent passwd $SUDO_USER | cut -d: -f6 )
+touch $SUDO_USER_HOME/Modèles/Document\ texte.txt || exit 1
 
 # écriture version du script
 mkdir -p $SCRIPT_CONF_DIR || exit 1
