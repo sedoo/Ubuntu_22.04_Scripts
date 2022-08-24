@@ -49,7 +49,7 @@ echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select tr
 apt install -y ttf-mscorefonts-installer || exit 1
 
 # nettoyage
-apt purge -y apport apport-gtk apport-symptoms popularity-contest ubuntu-report
+apt purge -y apport apport-gtk apport-symptoms cheese popularity-contest ubuntu-report
 apt autoremove --purge -y
 apt clean -y
 # remplacé par gnome-software
