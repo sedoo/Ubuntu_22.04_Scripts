@@ -48,6 +48,14 @@ apt install -y apt-transport-https arj btrfs-progs build-essential ca-certificat
 echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | /usr/bin/debconf-set-selections
 apt install -y ttf-mscorefonts-installer || exit 1
 
+# suppression snap et deb zoom
+# le snap zoom est maintenu par un tiers (Oliver Grawert)
+# https://snapcraft.io/zoom-client
+snap remove --purge zoom-client
+# le paquet deb ne peut se mettre à jour
+# par sécurité on utilisera le flatpak officiel
+apt purge -y zoom
+
 # nettoyage
 apt purge -y apport apport-gtk apport-symptoms cheese popularity-contest ubuntu-report
 apt autoremove --purge -y
@@ -64,14 +72,6 @@ flatpak install -y --noninteractive flathub com.github.tchx84.Flatseal || exit 1
 RUSER_UID=$(id -u $SUDO_USER)
 sudo -u $SUDO_USER DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/${RUSER_UID}/bus" gsettings set org.gnome.software packaging-format-preference "['deb', 'flatpak', 'snap']" || exit 1
 killall gnome-software
-
-# suppression snap et deb zoom
-# le snap zoom est maintenu par un tiers (Oliver Grawert)
-# https://snapcraft.io/zoom-client
-snap remove --purge zoom-client
-# le paquet deb ne peut se mettre à jour
-# par sécurité on utilisera le flatpak officiel
-apt purge -y zoom
 
 # nouveau document texte avec le clic droit
 SUDO_USER_HOME=$( getent passwd $SUDO_USER | cut -d: -f6 )
