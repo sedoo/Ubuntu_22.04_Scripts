@@ -7,7 +7,7 @@ then
 fi 
 
 # variables
-SCRIPT_VERSION="1"
+SCRIPT_VERSION="2"
 SCRIPT_CONF_DIR=/etc/sedoo
 SCRIPT_CONF_FILE=$SCRIPT_CONF_DIR/basics
 
@@ -31,7 +31,18 @@ if [ -e "$SCRIPT_CONF_FILE" ] ; then
         exit 0
     else
         echo "Une version différente du script est installée"
-        # redirection vers futurs patchs...
+        case $SCRIPT_CONF_FILE_VERSION in
+            1)
+                echo "V1 -> V2"
+                wget -qO - https://raw.githubusercontent.com/sedoo/Ubuntu_22.04_Scripts/main/SedooInstallGitHooks | sudo -u $SUDO_USER bash -s
+                echo 2 > $SCRIPT_CONF_FILE
+                ;;
+
+            *)
+                echo "Unknown version"
+                exit 1
+                ;;
+            esac
         exit 1
     fi
 fi
@@ -76,6 +87,9 @@ killall gnome-software
 # nouveau document texte avec le clic droit
 SUDO_USER_HOME=$( getent passwd $SUDO_USER | cut -d: -f6 )
 touch $SUDO_USER_HOME/Modèles/Document\ texte.txt || exit 1
+
+# git hooks
+wget -qO - https://raw.githubusercontent.com/sedoo/Ubuntu_22.04_Scripts/main/SedooInstallGitHooks | sudo -u $SUDO_USER bash -s
 
 # écriture version du script
 mkdir -p $SCRIPT_CONF_DIR || exit 1
