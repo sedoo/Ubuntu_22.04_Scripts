@@ -1,11 +1,12 @@
 {
-  "timeStamp": 1650000000000,
-  "version": "1.42.4",
+  "timeStamp": 1670000000000,
+  "version": "1.47.4",
   "userSettings": {
-    "externalLists": "https://raw.githubusercontent.com/DandelionSprout/adfilt/master/LegitimateURLShortener.txt",
+    "externalLists": "https://filters.adtidy.org/extension/ublock/filters/3.txt\nhttps://raw.githubusercontent.com/DandelionSprout/adfilt/master/LegitimateURLShortener.txt",
     "importedLists": [
+      "https://filters.adtidy.org/extension/ublock/filters/3.txt",
       "https://raw.githubusercontent.com/DandelionSprout/adfilt/master/LegitimateURLShortener.txt"
-    ]
+    ],
   },
   "selectedFilterLists": [
     "user-filters",
@@ -18,7 +19,6 @@
     "adguard-generic",
     "adguard-mobile",
     "easylist",
-    "adguard-spyware",
     "adguard-spyware-url",
     "block-lan",
     "easyprivacy",
@@ -35,6 +35,7 @@
     "dpollock-0",
     "plowe-0",
     "FRA-0",
+    "https://filters.adtidy.org/extension/ublock/filters/3.txt",
     "https://raw.githubusercontent.com/DandelionSprout/adfilt/master/LegitimateURLShortener.txt"
   ],
   "hiddenSettings": {},
@@ -51,5 +52,5 @@
   "dynamicFilteringString": "behind-the-scene * * noop\nbehind-the-scene * inline-script noop\nbehind-the-scene * 1p-script noop\nbehind-the-scene * 3p-script noop\nbehind-the-scene * 3p-frame noop\nbehind-the-scene * image noop\nbehind-the-scene * 3p noop",
   "urlFilteringString": "",
   "hostnameSwitchesString": "no-large-media: behind-the-scene false\nno-csp-reports: * true",
-  "userFilters": "www.lemonde.fr##.gdpr-lmd-wall\n"
+  "userFilters": "||discord.com/api/v*/science\n"
 }
