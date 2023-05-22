@@ -1,12 +1,11 @@
 {
-  "timeStamp": 1670000000000,
-  "version": "1.47.4",
+  "timeStamp": 1680000000000,
+  "version": "1.49.2",
   "userSettings": {
-    "externalLists": "https://filters.adtidy.org/extension/ublock/filters/3.txt\nhttps://raw.githubusercontent.com/DandelionSprout/adfilt/master/LegitimateURLShortener.txt",
+    "externalLists": "https://raw.githubusercontent.com/DandelionSprout/adfilt/master/LegitimateURLShortener.txt",
     "importedLists": [
-      "https://filters.adtidy.org/extension/ublock/filters/3.txt",
       "https://raw.githubusercontent.com/DandelionSprout/adfilt/master/LegitimateURLShortener.txt"
-    ],
+    ]
   },
   "selectedFilterLists": [
     "user-filters",
@@ -19,6 +18,7 @@
     "adguard-generic",
     "adguard-mobile",
     "easylist",
+    "adguard-spyware",
     "adguard-spyware-url",
     "block-lan",
     "easyprivacy",
@@ -27,15 +27,14 @@
     "curben-pup",
     "adguard-annoyance",
     "adguard-social",
-    "fanboy-thirdparty_social",
     "fanboy-cookiemonster",
-    "fanboy-annoyance",
     "fanboy-social",
+    "fanboy-annoyance",
+    "fanboy-thirdparty_social",
     "ublock-annoyances",
     "dpollock-0",
     "plowe-0",
     "FRA-0",
-    "https://filters.adtidy.org/extension/ublock/filters/3.txt",
     "https://raw.githubusercontent.com/DandelionSprout/adfilt/master/LegitimateURLShortener.txt"
   ],
   "hiddenSettings": {},
