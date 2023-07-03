@@ -12,9 +12,10 @@ declare -a errors;
 # Boucle sur les noms de fichiers présents dans le `stage`/`index` et
 # vérifie que leur contenu contient les chaînes listées dans PATTERNS.
 # Filtre uniquement sur les fichiers ajoutés (A), copiés (C), modifiés (M).
+IFS=$'\n';
 for file in $(git diff --staged --name-only --diff-filter=ACM); do
   for elem in ${!PATTERNS[*]} ; do
-    { git show :0:"$file" | grep -Eq ${elem}; } || continue;
+    { git show :0:"$file" | grep -Eiq ${elem}; } || continue;
     errors+=("${PATTERNS[${elem}]} dans le fichier ${file}");
   done
 done
