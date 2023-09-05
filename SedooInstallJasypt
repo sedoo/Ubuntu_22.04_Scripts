@@ -34,5 +34,7 @@ echo "function jasyptdecrypt () {" >> $GLOBAL_BASHRC
 echo "    $JASYPT_DIR/bin/decrypt.sh input=\$1 password=\$2" >> $GLOBAL_BASHRC
 echo "}" >> $GLOBAL_BASHRC
 
+chown -R root:root /opt/jasypt/
+
 echo ""
 echo "*** Installation terminée ***"
