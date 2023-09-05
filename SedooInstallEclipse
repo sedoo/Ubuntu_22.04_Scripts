@@ -53,5 +53,7 @@ echo "Terminal=false" >> $SHORTCUT_FILE
 echo "Comment=Eclipse IDE" >> $SHORTCUT_FILE
 echo "StartupWMClass=Eclipse" >> $SHORTCUT_FILE
 
+chown -R root:root /opt/eclipse/
+
 echo ""
 echo "*** Installation terminée ***"
