@@ -16,8 +16,8 @@ wget -qO - https://raw.githubusercontent.com/sedoo/Ubuntu_22.04_Scripts/main/ver
 cd /tmp
 
 # Installation classique
-wget https://mirror.ibcp.fr/pub/eclipse/technology/epp/downloads/release/2023-06/R/eclipse-java-2023-06-R-linux-gtk-x86_64.tar.gz || exit 1
-tar -xzvf eclipse-java-2023-06-R-linux-gtk-x86_64.tar.gz || exit 1
+wget https://mirror.ibcp.fr/pub/eclipse/technology/epp/downloads/release/2023-09/R/eclipse-java-2023-09-R-linux-gtk-x86_64.tar.gz || exit 1
+tar -xzvf eclipse-java-2023-09-R-linux-gtk-x86_64.tar.gz || exit 1
 rm -rf /opt/eclipse
 mv eclipse/ /opt/
 
