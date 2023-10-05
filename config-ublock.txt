@@ -1,6 +1,6 @@
 {
   "timeStamp": 1690000000000,
-  "version": "1.51.0",
+  "version": "1.52.2",
   "userSettings": {
     "externalLists": "https://raw.githubusercontent.com/DandelionSprout/adfilt/master/LegitimateURLShortener.txt",
     "importedLists": [
@@ -23,7 +23,6 @@
     "easyprivacy",
     "urlhaus-1",
     "curben-phishing",
-    "curben-pup",
     "dpollock-0",
     "plowe-0",
     "adguard-mobile-app-banners",
