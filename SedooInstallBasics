@@ -7,9 +7,26 @@ then
 fi 
 
 # variables
-SCRIPT_VERSION="2"
+SCRIPT_VERSION="3"
 SCRIPT_CONF_DIR=/etc/sedoo
 SCRIPT_CONF_FILE=$SCRIPT_CONF_DIR/basics
+
+# fonctions
+function v2_gitHooks() 
+{
+    wget -qO - https://raw.githubusercontent.com/sedoo/Ubuntu_22.04_Scripts/main/SedooInstallGitHooks | sudo -u $SUDO_USER bash -s
+}
+
+function v3_disableUbuntuUpgrade() 
+{
+    sed -i 's/^Prompt=lts$/Prompt=never/' /etc/update-manager/release-upgrades
+}
+
+function v3_disableUbuntuPro() 
+{
+    sed -i 's/^\([^#]\)/#\1/' /var/lib/ubuntu-advantage/apt-esm/etc/apt/sources.list.d/ubuntu-esm-apps.list
+    apt update
+}
 
 # vérifications OS
 . /etc/lsb-release
@@ -34,16 +51,32 @@ if [ -e "$SCRIPT_CONF_FILE" ] ; then
         case $SCRIPT_CONF_FILE_VERSION in
             1)
                 echo "V1 -> V2"
-                wget -qO - https://raw.githubusercontent.com/sedoo/Ubuntu_22.04_Scripts/main/SedooInstallGitHooks | sudo -u $SUDO_USER bash -s
-                echo 2 > $SCRIPT_CONF_FILE
-                ;;
+                
+                # git hooks
+                v2_gitHooks
+                
+                ;&
+            2)
+                echo "V2 -> V3"
+                
+                # désactivation mise à niveau Ubuntu
+                v3_disableUbuntuUpgrade
 
+                # désactivation Ubuntu Pro
+                v3_disableUbuntuPro
+                
+                # écriture version du script
+                echo $SCRIPT_VERSION > $SCRIPT_CONF_FILE
+                echo ""
+                echo "*** Version $SCRIPT_VERSION installée ***"
+                echo "*** Installation terminée ***"
+                ;;
             *)
-                echo "Unknown version"
+                echo "Version inconnue"
                 exit 1
                 ;;
-            esac
-        exit 1
+        esac
+        exit 0
     fi
 fi
 
@@ -89,7 +122,13 @@ SUDO_USER_HOME=$( getent passwd $SUDO_USER | cut -d: -f6 )
 touch $SUDO_USER_HOME/Modèles/Document\ texte.txt || exit 1
 
 # git hooks
-wget -qO - https://raw.githubusercontent.com/sedoo/Ubuntu_22.04_Scripts/main/SedooInstallGitHooks | sudo -u $SUDO_USER bash -s
+v2_gitHooks
+
+# désactivation mise à niveau Ubuntu
+v3_disableUbuntuUpgrade
+
+# désactivation Ubuntu Pro
+v3_disableUbuntuPro
 
 # écriture version du script
 mkdir -p $SCRIPT_CONF_DIR || exit 1
