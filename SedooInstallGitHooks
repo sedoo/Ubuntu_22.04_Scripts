@@ -8,7 +8,11 @@ fi
 
 # Installation
 mkdir -p ~/.config/git/hooks
-wget --no-check-certificate -O ~/.config/git/hooks/pre-commit https://sedoo-ada.omp.obs-mip.fr/myprecious/git_hooks_pre-commit || (echo "Merci de lancer le script en présentiel au SEDOO" && exit 1)
+wget --no-check-certificate -O ~/.config/git/hooks/pre-commit https://sedoo-ada.omp.obs-mip.fr/myprecious/git_hooks_pre-commit || {
+    echo ""
+    echo "Merci de lancer le script en présentiel au SEDOO"
+    exit 1
+}
 chmod +x ~/.config/git/hooks/pre-commit || exit 1
 git config --global core.hooksPath ~/.config/git/hooks || exit 1
 
