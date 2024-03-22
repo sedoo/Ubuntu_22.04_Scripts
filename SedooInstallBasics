@@ -14,7 +14,7 @@ SCRIPT_CONF_FILE=$SCRIPT_CONF_DIR/basics
 # fonctions
 function v2_gitHooks() 
 {
-    wget -qO - https://raw.githubusercontent.com/sedoo/Ubuntu_22.04_Scripts/main/SedooInstallGitHooks | sudo -u $SUDO_USER bash -s
+    wget -qO - https://raw.githubusercontent.com/sedoo/Ubuntu_22.04_Scripts/main/SedooInstallGitHooks | sudo -u $SUDO_USER bash -s || exit 1
 }
 
 function v3_disableUbuntuUpgrade() 
@@ -72,7 +72,7 @@ if [ -e "$SCRIPT_CONF_FILE" ] ; then
                 echo "*** Installation terminée ***"
                 ;;
             *)
-                echo "Version inconnue"
+                echo "Version installée inconnue"
                 exit 1
                 ;;
         esac
