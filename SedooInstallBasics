@@ -7,7 +7,7 @@ then
 fi 
 
 # variables
-SCRIPT_VERSION="3"
+SCRIPT_VERSION="4"
 SCRIPT_CONF_DIR=/etc/sedoo
 SCRIPT_CONF_FILE=$SCRIPT_CONF_DIR/basics
 
@@ -26,6 +26,12 @@ function v3_disableUbuntuPro()
 {
     sed -i 's/^\([^#]\)/#\1/' /var/lib/ubuntu-advantage/apt-esm/etc/apt/sources.list.d/ubuntu-esm-apps.list
     apt update
+}
+
+function v4_installJava17() 
+{
+    apt install -y openjdk-17-jdk openjdk-17-jre
+    update-java-alternatives -s java-1.11.0-openjdk-amd64
 }
 
 # vérifications OS
@@ -64,6 +70,13 @@ if [ -e "$SCRIPT_CONF_FILE" ] ; then
 
                 # désactivation Ubuntu Pro
                 v3_disableUbuntuPro
+                
+                ;&
+            3)
+                echo "V3 -> V4"
+                
+                # installation Java 17
+                v4_installJava17
                 
                 # écriture version du script
                 echo $SCRIPT_VERSION > $SCRIPT_CONF_FILE
@@ -129,6 +142,9 @@ v3_disableUbuntuUpgrade
 
 # désactivation Ubuntu Pro
 v3_disableUbuntuPro
+
+# installation Java 17
+v4_installJava17
 
 # écriture version du script
 mkdir -p $SCRIPT_CONF_DIR || exit 1
