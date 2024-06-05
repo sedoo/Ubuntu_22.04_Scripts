@@ -24,7 +24,7 @@ function v3_disableUbuntuUpgrade()
 
 function v3_disableUbuntuPro() 
 {
-    sed -i 's/^\([^#]\)/#\1/' /var/lib/ubuntu-advantage/apt-esm/etc/apt/sources.list.d/ubuntu-esm-apps.list
+    sed -i 's/^\([^#]\)/#\1/' /var/lib/ubuntu-advantage/apt-esm/etc/apt/sources.list.d/ubuntu-esm-apps.sources
     apt update
 }
 
