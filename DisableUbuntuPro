@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ "$UID" -ne "0" ]
+then
+  echo "Merci de lancer le script avec sudo"
+  exit 1
+fi 
+
+sed -i 's/^\([^#]\)/#\1/' /var/lib/ubuntu-advantage/apt-esm/etc/apt/sources.list.d/ubuntu-esm-apps.sources || exit 1
+apt update
+
+echo ""
+echo "*** Patch terminé ***"
+echo ""
