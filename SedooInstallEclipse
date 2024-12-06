@@ -4,11 +4,11 @@ if [ "$UID" -ne "0" ]
 then
   echo "Merci de lancer le script avec sudo"
   exit 1
-fi 
+fi
 
 # variables
 BASICS_SCRIPT_MIN_VERSION="1"
-ECLIPSE_RELEASE="2024-09"
+ECLIPSE_RELEASE="2024-12"
 
 # vérifications
 wget -qO - https://raw.githubusercontent.com/sedoo/Ubuntu_22.04_Scripts/main/version-check.sh | bash -s basics $BASICS_SCRIPT_MIN_VERSION || exit 1
@@ -31,8 +31,8 @@ mkdir -p $SEDOO_ECLIPSE_DIR
 
 mv ./lombok.jar $SEDOO_ECLIPSE_DIR
 cp /opt/eclipse/eclipse.ini $SEDOO_ECLIPSE_DIR
- 
-echo "-javaagent:$SEDOO_ECLIPSE_DIR/lombok.jar" >> $SEDOO_ECLIPSE_DIR/eclipse.ini  
+
+echo "-javaagent:$SEDOO_ECLIPSE_DIR/lombok.jar" >> $SEDOO_ECLIPSE_DIR/eclipse.ini
 
 SHORTCUT_FOLDER=/usr/share/applications
 
