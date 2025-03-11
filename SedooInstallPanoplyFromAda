@@ -16,7 +16,7 @@ wget -qO - https://raw.githubusercontent.com/sedoo/Ubuntu_22.04_Scripts/main/ver
 cd /tmp
 
 # Installation classique
-wget --no-check-certificate https://sedoo-ada.omp.obs-mip.fr/myprecious/PanoplyJ-5.5.5.tgz
+wget https://ada.sedoo.fr/myprecious/PanoplyJ-5.5.5.tgz
 tar -xzvf PanoplyJ-5.5.5.tgz || exit 1
 
 rm -rf /opt/PanoplyJ
