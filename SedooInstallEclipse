@@ -8,7 +8,7 @@ fi
 
 # variables
 BASICS_SCRIPT_MIN_VERSION="1"
-ECLIPSE_RELEASE="2024-12"
+ECLIPSE_RELEASE="2025-03"
 
 # vérifications
 wget -qO - https://raw.githubusercontent.com/sedoo/Ubuntu_22.04_Scripts/main/version-check.sh | bash -s basics $BASICS_SCRIPT_MIN_VERSION || exit 1
